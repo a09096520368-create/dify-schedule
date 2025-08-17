@@ -1,0 +1,22 @@
+name: Dify Schedule
+on:
+  schedule:
+    - cron: '30 4 * * *' # 毎日JST 13:30（UTC 04:30）
+  workflow_dispatch: # 手動実行を許可
+jobs:
+  run-dify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: yarn install
+      - name: Run Dify Schedule
+        env:
+          DIFY_TOKENS: ${{ secrets.DIFY_TOKENS }}
+          DIFY_BASE_URL: ${{ secrets.DIFY_BASE_URL }}
+          DIFY_INPUTS: ${{ secrets.DIFY_INPUTS }}
+        run: yarn start
