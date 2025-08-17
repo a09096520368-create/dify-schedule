@@ -2,8 +2,10 @@ name: Auto
 
 on:
   schedule:
-    - cron: '45 4 * * *' # 毎日JST 13:45（UTC 04:45）
-  workflow_dispatch:
+    - cron: '0 16 * * *'  # JST 01:00（UTC 16:00前日）
+    - cron: '24 23 * * *' # JST 08:24（UTC 23:24前日）
+    - cron: '48 4 * * *'  # JST 12:48（UTC 04:48）
+    - cron: '12 11 * * *' # JST 20:12（UTC 11:12）  workflow_dispatch:
 
 env:
   DIFY_TOKENS: ${{ secrets.DIFY_TOKENS }}
